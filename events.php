@@ -18,6 +18,7 @@ $msg = $_GET['msg'] ?? '';
     <?php include 'includes/sidebar.php'; ?>
 
     <main class="main">
+      <?php $page_title = 'Events'; include 'includes/header_bar.php'; ?>
       <div class="content">
         <div class="page-card">
           <div class="page-header">
@@ -56,7 +57,7 @@ $msg = $_GET['msg'] ?? '';
                     <td><?= htmlspecialchars($e['location']) ?></td>
                     <td class="actions">
                       <a href="edit-event.php?id=<?= $e['id'] ?>" class="btn-edit">Edit</a>
-                      <a href="delete-event.php?id=<?= $e['id'] ?>" class="btn-delete" onclick="return confirm('Delete this event?')">Delete</a>
+                      <a href="delete-event.php?id=<?= $e['id'] ?>" class="btn-delete" data-confirm="Delete this event? This cannot be undone.">Delete</a>
                     </td>
                   </tr>
                   <?php endforeach; ?>
@@ -68,5 +69,6 @@ $msg = $_GET['msg'] ?? '';
       </div>
     </main>
   </div>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

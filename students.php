@@ -57,12 +57,14 @@ $query_string = http_build_query(array_filter([
             <h1>Students <span style="font-size:0.85rem;color:#6b7280;font-weight:400;">(<?= $total ?>)</span></h1>
             <a href="add-student.php" class="btn-add">+ Add Student</a>
           </div>
+
           <?php if ($msg === 'deleted'): ?><div class="alert alert-success">Student deleted successfully.</div>
           <?php elseif ($msg === 'added'): ?><div class="alert alert-success">Student added successfully.</div>
           <?php elseif ($msg === 'updated'): ?><div class="alert alert-success">Student updated successfully.</div>
           <?php endif; ?>
+
           <form method="GET" class="filter-bar">
-            <input type="text" name="search" class="filter-select" placeholder="Search name, ID, email..." value="<?= htmlspecialchars($search) ?>">
+            <input type="text" name="search" class="filter-select" style="min-width:180px;" placeholder="Search name, ID, email..." value="<?= htmlspecialchars($search) ?>">
             <select name="program" class="filter-select">
               <option value="">All Programs</option>
               <?php foreach (['BCA','BBA','BIT','CSIT'] as $p): ?>
@@ -85,6 +87,7 @@ $query_string = http_build_query(array_filter([
               <a href="students.php" class="btn-secondary" style="padding:9px 14px;font-size:0.85rem;">Clear</a>
             <?php endif; ?>
           </form>
+
           <div class="table-wrapper">
             <table>
               <thead>
@@ -104,13 +107,14 @@ $query_string = http_build_query(array_filter([
                     <td class="actions">
                       <a href="view-student.php?id=<?= $s['id'] ?>" class="btn-view">View</a>
                       <a href="edit-student.php?id=<?= $s['id'] ?>" class="btn-edit">Edit</a>
-                      <a href="delete-student.php?id=<?= $s['id'] ?>" class="btn-delete" data-confirm="Delete this student? This cannot be undone.">Delete</a>
+                      <a href="delete-student.php?id=<?= $s['id'] ?>" class="btn-delete" data-confirm="Delete student <?= htmlspecialchars(addslashes($s['full_name'])) ?>? This cannot be undone.">Delete</a>
                     </td>
                   </tr>
                 <?php endforeach; endif; ?>
               </tbody>
             </table>
           </div>
+
           <?php if ($total_pages > 1): ?>
           <div class="pagination">
             <?php if ($page > 1): ?><a href="?page=<?= $page - 1 ?>&<?= $query_string ?>" class="page-btn">&lt;</a><?php endif; ?>

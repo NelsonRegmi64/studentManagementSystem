@@ -1,4 +1,5 @@
 <?php
+// Reusable top bar - pass $page_title
 $page_title = $page_title ?? 'Dashboard';
 ?>
 <header class="topbar">

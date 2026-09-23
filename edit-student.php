@@ -53,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'includes/sidebar.php'; ?>
 
     <main class="main">
+      <?php $page_title = 'Edit Student'; include 'includes/header_bar.php'; ?>
       <div class="content">
         <div class="form-card">
           <h1>Edit Student</h1>
@@ -126,5 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </main>
   </div>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

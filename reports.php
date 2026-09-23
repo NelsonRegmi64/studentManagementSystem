@@ -2,10 +2,16 @@
 require_once 'includes/auth_check.php';
 $db = getDB();
 
+// Students by program
 $by_program = $db->query("SELECT program, COUNT(*) as cnt FROM students GROUP BY program ORDER BY cnt DESC")->fetchAll();
+
+// Students by year
 $by_year = $db->query("SELECT year, COUNT(*) as cnt FROM students GROUP BY year ORDER BY year")->fetchAll();
+
+// Students by status
 $by_status = $db->query("SELECT status, COUNT(*) as cnt FROM students GROUP BY status")->fetchAll();
 
+// Attendance summary per event
 $att_summary = $db->query("
     SELECT e.event_id, e.title, e.event_date,
            SUM(CASE WHEN a.status = 'Present' THEN 1 ELSE 0 END) as present_count,
@@ -28,8 +34,10 @@ $att_summary = $db->query("
 <body>
   <div class="layout">
     <?php include 'includes/sidebar.php'; ?>
+
     <main class="main">
       <?php $page_title = 'Reports'; include 'includes/header_bar.php'; ?>
+
       <div class="content">
         <div class="stats-grid" style="margin-bottom:24px;">
           <?php foreach ($by_status as $s): ?>
@@ -45,6 +53,7 @@ $att_summary = $db->query("
           </div>
           <?php endif; ?>
         </div>
+
         <div class="report-grid">
           <div class="table-section">
             <h2>Students by Program</h2>
@@ -54,16 +63,19 @@ $att_summary = $db->query("
                 <tbody>
                   <?php if (empty($by_program)): ?>
                     <tr><td colspan="2" style="text-align:center;color:#999;">No data</td></tr>
-                  <?php else: foreach ($by_program as $r): ?>
+                  <?php else: ?>
+                    <?php foreach ($by_program as $r): ?>
                     <tr>
                       <td><?= htmlspecialchars($r['program']) ?></td>
                       <td><strong><?= $r['cnt'] ?></strong></td>
                     </tr>
-                  <?php endforeach; endif; ?>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
                 </tbody>
               </table>
             </div>
           </div>
+
           <div class="table-section">
             <h2>Students by Year</h2>
             <div class="table-wrapper">
@@ -72,17 +84,20 @@ $att_summary = $db->query("
                 <tbody>
                   <?php if (empty($by_year)): ?>
                     <tr><td colspan="2" style="text-align:center;color:#999;">No data</td></tr>
-                  <?php else: foreach ($by_year as $r): ?>
+                  <?php else: ?>
+                    <?php foreach ($by_year as $r): ?>
                     <tr>
                       <td><?= htmlspecialchars($r['year']) ?></td>
                       <td><strong><?= $r['cnt'] ?></strong></td>
                     </tr>
-                  <?php endforeach; endif; ?>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+
         <div class="table-section" style="margin-top:20px;">
           <h2>Attendance Summary by Event</h2>
           <div class="table-wrapper">
@@ -100,7 +115,8 @@ $att_summary = $db->query("
               <tbody>
                 <?php if (empty($att_summary)): ?>
                   <tr><td colspan="6" style="text-align:center;color:#999;padding:24px;">No events yet.</td></tr>
-                <?php else: foreach ($att_summary as $r): ?>
+                <?php else: ?>
+                  <?php foreach ($att_summary as $r): ?>
                   <tr>
                     <td><?= htmlspecialchars($r['event_id']) ?></td>
                     <td><?= htmlspecialchars($r['title']) ?></td>
@@ -109,7 +125,8 @@ $att_summary = $db->query("
                     <td><span class="badge inactive"><?= (int)$r['absent_count'] ?></span></td>
                     <td><?= (int)$r['total_marked'] ?></td>
                   </tr>
-                <?php endforeach; endif; ?>
+                  <?php endforeach; ?>
+                <?php endif; ?>
               </tbody>
             </table>
           </div>

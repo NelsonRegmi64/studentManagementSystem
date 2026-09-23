@@ -51,6 +51,7 @@ if ($selected_event) {
     <?php include 'includes/sidebar.php'; ?>
 
     <main class="main">
+      <?php $page_title = 'Attendance'; include 'includes/header_bar.php'; ?>
       <div class="content">
         <div class="page-card" style="max-width:700px;">
           <h1>Mark Attendance</h1>
@@ -114,5 +115,6 @@ if ($selected_event) {
       </div>
     </main>
   </div>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

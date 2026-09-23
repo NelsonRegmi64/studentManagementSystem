@@ -69,6 +69,7 @@ if (isset($_POST['update_profile'])) {
     <?php include 'includes/sidebar.php'; ?>
 
     <main class="main">
+      <?php $page_title = 'Settings'; include 'includes/header_bar.php'; ?>
       <div class="content">
         <div class="settings-wrapper">
           <!-- Change Password -->
@@ -122,5 +123,6 @@ if (isset($_POST['update_profile'])) {
       </div>
     </main>
   </div>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
