@@ -32,7 +32,7 @@ $attendance = $att->fetchAll();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($student['full_name']) ?> - Student Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
   <div class="layout">
@@ -90,7 +90,7 @@ $attendance = $att->fetchAll();
         <div class="table-section" style="margin-top:20px;">
           <h2>Attendance History</h2>
           <div class="table-wrapper">
-            <table>
+            <table class="stack-table">
               <thead>
                 <tr>
                   <th>Event</th>
@@ -105,10 +105,10 @@ $attendance = $att->fetchAll();
                 <?php else: ?>
                   <?php foreach ($attendance as $a): ?>
                   <tr>
-                    <td><?= htmlspecialchars($a['title']) ?></td>
-                    <td><?= htmlspecialchars($a['event_date']) ?></td>
-                    <td><span class="badge <?= $a['status'] === 'Present' ? 'active' : 'inactive' ?>"><?= htmlspecialchars($a['status']) ?></span></td>
-                    <td><?= date('M d, Y H:i', strtotime($a['marked_at'])) ?></td>
+                    <td data-label="Event"><?= htmlspecialchars($a['title']) ?></td>
+                    <td data-label="Date"><?= htmlspecialchars($a['event_date']) ?></td>
+                    <td data-label="Status"><span class="badge <?= $a['status'] === 'Present' ? 'active' : 'inactive' ?>"><?= htmlspecialchars($a['status']) ?></span></td>
+                    <td data-label="Marked"><?= date('M d, Y H:i', strtotime($a['marked_at'])) ?></td>
                   </tr>
                   <?php endforeach; ?>
                 <?php endif; ?>
@@ -119,6 +119,6 @@ $attendance = $att->fetchAll();
       </div>
     </main>
   </div>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=4"></script>
 </body>
 </html>

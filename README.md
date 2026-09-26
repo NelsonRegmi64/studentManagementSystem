@@ -43,6 +43,24 @@ Open in browser:
 http://localhost/sms-php/
 ```
 
+
+## Update to latest code (from GitHub)
+
+If you already copied the project into XAMPP, replace the old files with the latest from GitHub:
+
+1. Open https://github.com/NelsonRegmi64/studentManagementSystem
+2. Click the green **Code** button → **Download ZIP**
+3. Unzip it
+4. Copy **all files** into your existing folder (`C:\xampp\htdocs\sms-php`) and choose **Replace** when asked
+5. In the browser, press **Ctrl+F5** (hard refresh) so old CSS is not cached
+
+Or with git:
+```
+cd C:\xampp\htdocs\sms-php
+git pull origin main
+```
+Then hard-refresh the page (Ctrl+F5).
+
 ## Default Login
 
 | Email | Password |

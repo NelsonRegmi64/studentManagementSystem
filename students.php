@@ -44,7 +44,7 @@ $query_string = http_build_query(array_filter([
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Students - Student Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
   <div class="layout">
@@ -89,7 +89,7 @@ $query_string = http_build_query(array_filter([
           </form>
 
           <div class="table-wrapper">
-            <table>
+            <table class="stack-table">
               <thead>
                 <tr><th>ID</th><th>Name</th><th>Email</th><th>Program</th><th>Year</th><th>Status</th><th>Action</th></tr>
               </thead>
@@ -98,13 +98,13 @@ $query_string = http_build_query(array_filter([
                   <tr><td colspan="7"><div class="empty-state"><p>No students found.</p><a href="add-student.php" class="btn-add">+ Add Student</a></div></td></tr>
                 <?php else: foreach ($students as $s): ?>
                   <tr>
-                    <td><?= htmlspecialchars($s['student_id']) ?></td>
-                    <td><?= htmlspecialchars($s['full_name']) ?></td>
-                    <td><?= htmlspecialchars($s['email']) ?></td>
-                    <td><?= htmlspecialchars($s['program']) ?></td>
-                    <td><?= htmlspecialchars($s['year']) ?></td>
-                    <td><span class="badge <?= strtolower($s['status']) ?>"><?= htmlspecialchars($s['status']) ?></span></td>
-                    <td class="actions">
+                    <td data-label="ID"><?= htmlspecialchars($s['student_id']) ?></td>
+                    <td data-label="Name"><?= htmlspecialchars($s['full_name']) ?></td>
+                    <td data-label="Email"><?= htmlspecialchars($s['email']) ?></td>
+                    <td data-label="Program"><?= htmlspecialchars($s['program']) ?></td>
+                    <td data-label="Year"><?= htmlspecialchars($s['year']) ?></td>
+                    <td data-label="Status"><span class="badge <?= strtolower($s['status']) ?>"><?= htmlspecialchars($s['status']) ?></span></td>
+                    <td class="actions" data-label="Action">
                       <a href="view-student.php?id=<?= $s['id'] ?>" class="btn-view">View</a>
                       <a href="edit-student.php?id=<?= $s['id'] ?>" class="btn-edit">Edit</a>
                       <a href="delete-student.php?id=<?= $s['id'] ?>" class="btn-delete" data-confirm="Delete student <?= htmlspecialchars(addslashes($s['full_name'])) ?>? This cannot be undone.">Delete</a>
@@ -128,6 +128,6 @@ $query_string = http_build_query(array_filter([
       </div>
     </main>
   </div>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=4"></script>
 </body>
 </html>

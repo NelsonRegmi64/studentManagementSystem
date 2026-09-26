@@ -12,15 +12,15 @@ $stmt->execute([$today]);
 $today_attendance = $stmt->fetchColumn();
 
 $recent = $db->query("SELECT * FROM students ORDER BY created_at DESC LIMIT 5")->fetchAll();
-$upcoming = $db->query("SELECT * FROM events WHERE event_date >= CURDATE() ORDER BY event_date ASC LIMIT 3")->fetchAll();
+$upcoming = $db->query("SELECT * FROM events WHERE event_date >= CURDATE() ORDER BY event_date ASC LIMIT 4")->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Dashboard - Student Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
   <div class="layout">
@@ -47,51 +47,54 @@ $upcoming = $db->query("SELECT * FROM events WHERE event_date >= CURDATE() ORDER
           </div>
         </div>
 
+        <div class="quick-actions">
+          <a class="qa-btn" href="add-student.php">+ Student</a>
+          <a class="qa-btn" href="add-event.php">+ Event</a>
+          <a class="qa-btn" href="attendance.php">Attendance</a>
+          <a class="qa-btn" href="reports.php">Reports</a>
+        </div>
+
         <div class="dash-grid">
           <div class="table-section">
             <h2>Recent Students</h2>
-            <div class="table-wrapper">
-              <table>
-                <thead><tr><th>ID</th><th>Name</th><th>Program</th><th>Status</th><th></th></tr></thead>
-                <tbody>
-                  <?php if (empty($recent)): ?>
-                    <tr><td colspan="5"><div class="empty-state" style="padding:24px;"><p>No students yet.</p><a href="add-student.php" class="btn-add">+ Add Student</a></div></td></tr>
-                  <?php else: foreach ($recent as $s): ?>
-                    <tr>
-                      <td><?= htmlspecialchars($s['student_id']) ?></td>
-                      <td><?= htmlspecialchars($s['full_name']) ?></td>
-                      <td><?= htmlspecialchars($s['program']) ?></td>
-                      <td><span class="badge <?= strtolower($s['status']) ?>"><?= htmlspecialchars($s['status']) ?></span></td>
-                      <td><a href="view-student.php?id=<?= $s['id'] ?>" class="btn-view">View</a></td>
-                    </tr>
-                  <?php endforeach; endif; ?>
-                </tbody>
-              </table>
-            </div>
+            <?php if (empty($recent)): ?>
+              <div class="empty-state" style="padding:24px;"><p>No students yet.</p><a href="add-student.php" class="btn-add">+ Add Student</a></div>
+            <?php else: ?>
+              <div class="card-list">
+                <?php foreach ($recent as $s): ?>
+                  <a class="list-card" href="view-student.php?id=<?= (int)$s['id'] ?>">
+                    <div class="list-card-main">
+                      <strong><?= htmlspecialchars($s['full_name']) ?></strong>
+                      <span class="muted"><?= htmlspecialchars($s['student_id']) ?> · <?= htmlspecialchars($s['program']) ?></span>
+                    </div>
+                    <span class="badge <?= strtolower($s['status']) ?>"><?= htmlspecialchars($s['status']) ?></span>
+                  </a>
+                <?php endforeach; ?>
+              </div>
+            <?php endif; ?>
           </div>
           <div class="table-section">
             <h2>Upcoming Events</h2>
-            <div class="table-wrapper">
-              <table>
-                <thead><tr><th>Title</th><th>Date</th><th>Location</th></tr></thead>
-                <tbody>
-                  <?php if (empty($upcoming)): ?>
-                    <tr><td colspan="3"><div class="empty-state" style="padding:24px;"><p>No upcoming events.</p><a href="add-event.php" class="btn-add">+ Add Event</a></div></td></tr>
-                  <?php else: foreach ($upcoming as $e): ?>
-                    <tr>
-                      <td><?= htmlspecialchars($e['title']) ?></td>
-                      <td><?= htmlspecialchars($e['event_date']) ?></td>
-                      <td><?= htmlspecialchars($e['location']) ?></td>
-                    </tr>
-                  <?php endforeach; endif; ?>
-                </tbody>
-              </table>
-            </div>
+            <?php if (empty($upcoming)): ?>
+              <div class="empty-state" style="padding:24px;"><p>No upcoming events.</p><a href="add-event.php" class="btn-add">+ Add Event</a></div>
+            <?php else: ?>
+              <div class="card-list">
+                <?php foreach ($upcoming as $e): ?>
+                  <div class="list-card">
+                    <div class="list-card-main">
+                      <strong><?= htmlspecialchars($e['title']) ?></strong>
+                      <span class="muted"><?= htmlspecialchars($e['event_date']) ?> · <?= htmlspecialchars($e['location'] ?: 'No location') ?></span>
+                    </div>
+                    <a href="edit-event.php?id=<?= (int)$e['id'] ?>" class="btn-view">View</a>
+                  </div>
+                <?php endforeach; ?>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
       </div>
     </main>
   </div>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=4"></script>
 </body>
 </html>

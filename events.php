@@ -11,7 +11,7 @@ $msg = $_GET['msg'] ?? '';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Events - Student Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
   <div class="layout">
@@ -35,7 +35,7 @@ $msg = $_GET['msg'] ?? '';
           <?php endif; ?>
 
           <div class="table-wrapper">
-            <table>
+            <table class="stack-table">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -51,11 +51,11 @@ $msg = $_GET['msg'] ?? '';
                 <?php else: ?>
                   <?php foreach ($events as $e): ?>
                   <tr>
-                    <td><?= htmlspecialchars($e['event_id']) ?></td>
-                    <td><?= htmlspecialchars($e['title']) ?></td>
-                    <td><?= htmlspecialchars($e['event_date']) ?></td>
-                    <td><?= htmlspecialchars($e['location']) ?></td>
-                    <td class="actions">
+                    <td data-label="ID"><?= htmlspecialchars($e['event_id']) ?></td>
+                    <td data-label="Title"><?= htmlspecialchars($e['title']) ?></td>
+                    <td data-label="Date"><?= htmlspecialchars($e['event_date']) ?></td>
+                    <td data-label="Location"><?= htmlspecialchars($e['location']) ?></td>
+                    <td class="actions" data-label="Action">
                       <a href="edit-event.php?id=<?= $e['id'] ?>" class="btn-edit">Edit</a>
                       <a href="delete-event.php?id=<?= $e['id'] ?>" class="btn-delete" data-confirm="Delete this event? This cannot be undone.">Delete</a>
                     </td>
@@ -69,6 +69,6 @@ $msg = $_GET['msg'] ?? '';
       </div>
     </main>
   </div>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=4"></script>
 </body>
 </html>

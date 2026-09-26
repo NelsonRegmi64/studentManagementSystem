@@ -7,6 +7,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <div class="sidebar-header">
     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
     <span>SMS</span>
+    <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">&times;</button>
   </div>
   <nav class="sidebar-nav">
     <a href="dashboard.php" class="nav-item <?= $current_page == 'dashboard.php' ? 'active' : '' ?>">

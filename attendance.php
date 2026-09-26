@@ -44,7 +44,7 @@ if ($selected_event) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Attendance - Student Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
   <div class="layout">
@@ -81,7 +81,7 @@ if ($selected_event) {
             <input type="hidden" name="event_id" value="<?= $selected_event ?>">
 
             <div class="table-wrapper">
-              <table>
+              <table class="stack-table">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -92,9 +92,9 @@ if ($selected_event) {
                 <tbody>
                   <?php foreach ($students as $s): ?>
                   <tr>
-                    <td><?= htmlspecialchars($s['student_id']) ?></td>
-                    <td><?= htmlspecialchars($s['full_name']) ?></td>
-                    <td>
+                    <td data-label="ID"><?= htmlspecialchars($s['student_id']) ?></td>
+                    <td data-label="Name"><?= htmlspecialchars($s['full_name']) ?></td>
+                    <td data-label="Status">
                       <select name="status[<?= $s['id'] ?>]" class="status-select">
                         <option value="Present" <?= ($existing[$s['id']] ?? 'Present') === 'Present' ? 'selected' : '' ?>>Present</option>
                         <option value="Absent" <?= ($existing[$s['id']] ?? '') === 'Absent' ? 'selected' : '' ?>>Absent</option>
@@ -115,6 +115,6 @@ if ($selected_event) {
       </div>
     </main>
   </div>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=4"></script>
 </body>
 </html>

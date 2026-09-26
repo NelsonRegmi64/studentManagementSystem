@@ -29,7 +29,7 @@ $att_summary = $db->query("
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reports - Student Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
   <div class="layout">
@@ -58,7 +58,7 @@ $att_summary = $db->query("
           <div class="table-section">
             <h2>Students by Program</h2>
             <div class="table-wrapper">
-              <table>
+              <table class="stack-table">
                 <thead><tr><th>Program</th><th>Count</th></tr></thead>
                 <tbody>
                   <?php if (empty($by_program)): ?>
@@ -66,8 +66,8 @@ $att_summary = $db->query("
                   <?php else: ?>
                     <?php foreach ($by_program as $r): ?>
                     <tr>
-                      <td><?= htmlspecialchars($r['program']) ?></td>
-                      <td><strong><?= $r['cnt'] ?></strong></td>
+                      <td data-label="Program"><?= htmlspecialchars($r['program']) ?></td>
+                      <td data-label="Count"><strong><?= $r['cnt'] ?></strong></td>
                     </tr>
                     <?php endforeach; ?>
                   <?php endif; ?>
@@ -79,7 +79,7 @@ $att_summary = $db->query("
           <div class="table-section">
             <h2>Students by Year</h2>
             <div class="table-wrapper">
-              <table>
+              <table class="stack-table">
                 <thead><tr><th>Year</th><th>Count</th></tr></thead>
                 <tbody>
                   <?php if (empty($by_year)): ?>
@@ -87,8 +87,8 @@ $att_summary = $db->query("
                   <?php else: ?>
                     <?php foreach ($by_year as $r): ?>
                     <tr>
-                      <td><?= htmlspecialchars($r['year']) ?></td>
-                      <td><strong><?= $r['cnt'] ?></strong></td>
+                      <td data-label="Year"><?= htmlspecialchars($r['year']) ?></td>
+                      <td data-label="Count"><strong><?= $r['cnt'] ?></strong></td>
                     </tr>
                     <?php endforeach; ?>
                   <?php endif; ?>
@@ -101,7 +101,7 @@ $att_summary = $db->query("
         <div class="table-section" style="margin-top:20px;">
           <h2>Attendance Summary by Event</h2>
           <div class="table-wrapper">
-            <table>
+            <table class="stack-table">
               <thead>
                 <tr>
                   <th>Event ID</th>
@@ -118,12 +118,12 @@ $att_summary = $db->query("
                 <?php else: ?>
                   <?php foreach ($att_summary as $r): ?>
                   <tr>
-                    <td><?= htmlspecialchars($r['event_id']) ?></td>
-                    <td><?= htmlspecialchars($r['title']) ?></td>
-                    <td><?= htmlspecialchars($r['event_date']) ?></td>
-                    <td><span class="badge active"><?= (int)$r['present_count'] ?></span></td>
-                    <td><span class="badge inactive"><?= (int)$r['absent_count'] ?></span></td>
-                    <td><?= (int)$r['total_marked'] ?></td>
+                    <td data-label="Event ID"><?= htmlspecialchars($r['event_id']) ?></td>
+                    <td data-label="Title"><?= htmlspecialchars($r['title']) ?></td>
+                    <td data-label="Date"><?= htmlspecialchars($r['event_date']) ?></td>
+                    <td data-label="Present"><span class="badge active"><?= (int)$r['present_count'] ?></span></td>
+                    <td data-label="Absent"><span class="badge inactive"><?= (int)$r['absent_count'] ?></span></td>
+                    <td data-label="Total"><?= (int)$r['total_marked'] ?></td>
                   </tr>
                   <?php endforeach; ?>
                 <?php endif; ?>
@@ -134,6 +134,6 @@ $att_summary = $db->query("
       </div>
     </main>
   </div>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=4"></script>
 </body>
 </html>
