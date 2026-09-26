@@ -20,7 +20,7 @@ $upcoming = $db->query("SELECT * FROM events WHERE event_date >= CURDATE() ORDER
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Dashboard - Student Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css?v=4">
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
 </head>
 <body>
   <div class="layout">
@@ -95,6 +95,6 @@ $upcoming = $db->query("SELECT * FROM events WHERE event_date >= CURDATE() ORDER
       </div>
     </main>
   </div>
-  <script src="assets/js/app.js?v=4"></script>
+  <script src="assets/js/app.js?v=5"></script>
 </body>
 </html>

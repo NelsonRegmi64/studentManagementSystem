@@ -24,6 +24,12 @@ CREATE TABLE IF NOT EXISTS students (
     program VARCHAR(50) NOT NULL,
     year VARCHAR(10) NOT NULL,
     status ENUM('Active', 'Inactive') DEFAULT 'Active',
+    gender VARCHAR(20) DEFAULT NULL,
+    date_of_birth DATE DEFAULT NULL,
+    section VARCHAR(10) DEFAULT NULL,
+    guardian_name VARCHAR(100) DEFAULT NULL,
+    guardian_phone VARCHAR(20) DEFAULT NULL,
+    notes TEXT DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -55,15 +61,6 @@ INSERT INTO users (full_name, email, password) VALUES
 ('Neishan Regmi', 'neishan@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 -- Password is: password
 
-INSERT INTO students (student_id, full_name, email, phone, address, program, year, status) VALUES
-('ST001', 'Ayush Shrestha', 'ayush@mail.com', '9801234567', 'Kathmandu', 'BCA', '2nd', 'Active'),
-('ST002', 'Priya Rai', 'priya@mail.com', '9801234568', 'Lalitpur', 'BCA', '2nd', 'Active'),
-('ST003', 'Suman Thapa', 'suman@mail.com', '9801234569', 'Bhaktapur', 'BCA', '1st', 'Active'),
-('ST004', 'Ramesh Magar', 'ramesh@mail.com', '9801234570', 'Pokhara', 'BCA', '2nd', 'Active'),
-('ST005', 'Nisha Gurung', 'nisha@mail.com', '9801234571', 'Kathmandu', 'BCA', '1st', 'Active');
+-- No demo students. Add records from the Add Student page.
 
-INSERT INTO events (event_id, title, event_date, location, description) VALUES
-('EVT001', 'Welcome Program', '2026-08-15', 'College Hall', 'Orientation for new students'),
-('EVT002', 'Tech Talk', '2026-08-25', 'Seminar Hall', 'Talk on latest technologies'),
-('EVT003', 'Sports Day', '2026-09-05', 'College Ground', 'Annual sports competition'),
-('EVT004', 'Workshop', '2026-09-15', 'Lab', 'Hands-on coding workshop');
+-- No demo events. Add records from the Add Event page.

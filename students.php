@@ -44,7 +44,7 @@ $query_string = http_build_query(array_filter([
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Students - Student Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css?v=4">
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
 </head>
 <body>
   <div class="layout">
@@ -67,7 +67,7 @@ $query_string = http_build_query(array_filter([
             <input type="text" name="search" class="filter-select" style="min-width:180px;" placeholder="Search name, ID, email..." value="<?= htmlspecialchars($search) ?>">
             <select name="program" class="filter-select">
               <option value="">All Programs</option>
-              <?php foreach (['BCA','BBA','BIT','CSIT'] as $p): ?>
+              <?php foreach (['BCA','BBA','BIT','CSIT','BIM'] as $p): ?>
                 <option value="<?= $p ?>" <?= $filter_program === $p ? 'selected' : '' ?>><?= $p ?></option>
               <?php endforeach; ?>
             </select>
@@ -91,16 +91,17 @@ $query_string = http_build_query(array_filter([
           <div class="table-wrapper">
             <table class="stack-table">
               <thead>
-                <tr><th>ID</th><th>Name</th><th>Email</th><th>Program</th><th>Year</th><th>Status</th><th>Action</th></tr>
+                <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Program</th><th>Year</th><th>Status</th><th>Action</th></tr>
               </thead>
               <tbody>
                 <?php if (empty($students)): ?>
-                  <tr><td colspan="7"><div class="empty-state"><p>No students found.</p><a href="add-student.php" class="btn-add">+ Add Student</a></div></td></tr>
+                  <tr><td colspan="8"><div class="empty-state"><p>No students found.</p><a href="add-student.php" class="btn-add">+ Add Student</a></div></td></tr>
                 <?php else: foreach ($students as $s): ?>
                   <tr>
                     <td data-label="ID"><?= htmlspecialchars($s['student_id']) ?></td>
                     <td data-label="Name"><?= htmlspecialchars($s['full_name']) ?></td>
                     <td data-label="Email"><?= htmlspecialchars($s['email']) ?></td>
+                    <td data-label="Phone"><?= htmlspecialchars($s['phone'] ?: '—') ?></td>
                     <td data-label="Program"><?= htmlspecialchars($s['program']) ?></td>
                     <td data-label="Year"><?= htmlspecialchars($s['year']) ?></td>
                     <td data-label="Status"><span class="badge <?= strtolower($s['status']) ?>"><?= htmlspecialchars($s['status']) ?></span></td>
@@ -128,6 +129,6 @@ $query_string = http_build_query(array_filter([
       </div>
     </main>
   </div>
-  <script src="assets/js/app.js?v=4"></script>
+  <script src="assets/js/app.js?v=5"></script>
 </body>
 </html>

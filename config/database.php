@@ -21,6 +21,8 @@ function getDB() {
                     PDO::ATTR_EMULATE_PREPARES => false
                 ]
             );
+            require_once __DIR__ . '/../includes/schema_upgrade.php';
+            upgradeSchema($conn);
         } catch (PDOException $e) {
             die("Database connection failed: " . $e->getMessage() . 
                 "<br><br>Please make sure:<br>
